@@ -4,3 +4,6 @@ Ciao Pietro, come stai?
 che noia...
 ah ma sei qui!
 chi altro c'e'?c'e' anche Pippo!
+Che bello! funziona anche in VSC!
+vediamo sto conflitto...
+sicuro?
