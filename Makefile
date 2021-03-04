@@ -1,7 +1,7 @@
 all:
 	g++ Lezione7_Valgrind/memcheck.cpp -o main_executable
 
-debug_executable:
+debug_executable: Lezione7_Valgrind/memcheck.cpp
 	g++ Lezione7_Valgrind/memcheck.cpp -g -o debug_executable
 
 memcheck: debug_executable

@@ -4,7 +4,7 @@ using std::cout;
 using std::endl;
 
 int main() {
-    int x = 0;
-    int y = x + 5;
-    cout << y << endl;
+    int* a = new int[10];
+    delete [] a;
+    cout << "Hi " << a[5] << endl;
 }

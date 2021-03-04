@@ -3,7 +3,7 @@
 	"tasks": [
 		{
 			"type": "cppbuild",
-			"label": "make memcheck",
+			"label": "make debug",
 			"command": "make",
 			"args": [
 				"debug_executable"
