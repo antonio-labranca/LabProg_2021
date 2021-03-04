@@ -5,6 +5,6 @@ using std::endl;
 
 int main() {
     int* a = new int[10];
+    cout << a[10] << endl;
     delete [] a;
-    cout << "Hi " << a[5] << endl;
 }
