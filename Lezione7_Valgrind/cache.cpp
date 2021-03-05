@@ -76,7 +76,7 @@ int sequential_access(){
 
 int main(){
 
-    random_access();
+    //random_access();
     sequential_access();
    
 }
