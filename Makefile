@@ -4,6 +4,9 @@ all:
 debug_executable: Lezione9_Calculator/calculator.cpp
 	g++ Lezione9_Calculator/calculator.cpp -g -o debug_executable
 
+exercise: Esercitazione_temp/esercitazione.cpp
+	g++ Esercitazione_temp/esercitazione.cpp -g -o debug_executable
+
 memcheck: debug_executable
 	valgrind --track-origins=yes --leak-check=full ./debug_executable
 
