@@ -1,8 +1,8 @@
 all:
 	g++ Lezione9_Calculator/memcheck.cpp -o main_executable
 
-debug_executable: Lezione9_Calculator/bps.cpp
-	g++ Lezione9_Calculator/bps.cpp -g -o debug_executable
+debug_executable: Lezione9_Calculator/calculator.cpp
+	g++ Lezione9_Calculator/calculator.cpp -g -o debug_executable
 
 exercise: Esercitazione_temp/esercitazione.cpp
 	g++ Esercitazione_temp/esercitazione.cpp -g -o debug_executable
