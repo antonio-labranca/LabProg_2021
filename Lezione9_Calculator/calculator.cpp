@@ -74,17 +74,99 @@ void read_input() {
   tok.push_back(Token{true, number});
 }
 
-int main() {
-   read_input();
-   double result = tok.at(0).value;
-   for(int i = 1; i < tok.size()-1; i+=2) {
-      if(tok.at(i).value == '+') {
-         result = result + tok.at(i+1).value;
-      }
-      if(tok.at(i).value == '*') {
-         result = result * tok.at(i+1).value;
+double expression();
+double term();
+double primary();
+double number();
+
+
+Token get_token() {
+   Token result = tok.at(0);
+   tok.erase(tok.begin());
+   return result;
+}
+
+void put_back(Token token) {
+   tok.insert(tok.begin(), token);
+}
+
+struct syntax_error {};
+
+double expression() {
+   //Term
+   //Expression '+' Term
+   //Expression '-' Term
+   double left = term();
+   if(tok.empty())
+      return left;
+   Token op = get_token();
+   if(op.isNumber)
+      throw syntax_error{};
+   while(true) {
+      switch((char) op.value) {
+         case '+':
+            left += term();
+            if(tok.empty())
+               return left;
+            op = get_token();
+            break;
+         case '-':
+            left -= term();
+            if(tok.empty())
+               return left;
+            op = get_token();
+            break;
+         default:
+            put_back(op);
+            return left;
       }
    }
+}
+
+double term() {
+   //Primary
+   //Term '*' Primary
+   //Term '/' Primary
+   double left = primary();
+   if(tok.empty())
+      return left;
+   Token op = get_token();
+   if(op.isNumber)
+      throw syntax_error{};
+   while(true) {
+      switch((char) op.value) {
+         case '*':
+            left *= term();
+            if(tok.empty())
+               return left;
+            op = get_token();
+            break;
+         case '/':
+            left /= term();
+            if(tok.empty())
+               return left;
+            op = get_token();
+            break;
+         default:
+            put_back(op);
+            return left;
+      }
+   }
+}
+
+double primary() {
+   return number();
+}
+double number() {
+   Token t = get_token();
+   if(t.isNumber)
+      return t.value;
+   else throw syntax_error{};
+}
+
+int main() {
+   read_input();
+   double result = expression();
    cout << result;
    return 0;
 
