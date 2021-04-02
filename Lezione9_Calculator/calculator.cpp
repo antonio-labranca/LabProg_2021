@@ -12,14 +12,18 @@ vector<Token> tok = vector<Token>(0);
 
 void read_input() {
   double number = 0;
-  char op = 0;
-  cin >> number >> op; 
+  char op;
+  cin >> op;
   while(op!='=') {
-    tok.push_back(Token{true, number});
-    tok.push_back(Token{false, (double) op});
-    cin >> number >> op; 
+     if(op >= '0' && op <= '9') {
+         cin.putback(op);
+         cin >> number;
+         tok.push_back(Token{true, number});
+     }
+     else
+         tok.push_back(Token{false, (double) op});
+     cin >> op;
   }
-  tok.push_back(Token{true, number});
 }
 
 double expression();
@@ -103,19 +107,33 @@ double term() {
 }
 
 double primary() {
-   return number();
+   //Number
+   //'(' Expression ')'
+   Token op = get_token();
+   double result;
+   switch((char) op.value) {
+      case '(':
+         result = expression();
+         op = get_token();
+         if(op.isNumber || op.value!=')')
+            throw syntax_error{};
+         else return result;
+         break;
+      default:
+         put_back(op);
+         return number();
+   }
 }
 double number() {
    Token t = get_token();
    if(t.isNumber)
       return t.value;
    else throw syntax_error{};
-}
+} 
 
 int main() {
    read_input();
    double result = expression();
    cout << result << endl;
    return 0;
-
 }
